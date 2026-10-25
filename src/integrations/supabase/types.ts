@@ -14,16 +14,262 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      blogs: {
+        Row: {
+          author_id: string | null
+          category: string | null
+          content: string
+          cover_image_url: string | null
+          created_at: string
+          featured: boolean
+          id: string
+          image_urls: string[]
+          published_at: string | null
+          short_description: string | null
+          slug: string
+          sort_order: number
+          status: Database["public"]["Enums"]["content_status"]
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          author_id?: string | null
+          category?: string | null
+          content?: string
+          cover_image_url?: string | null
+          created_at?: string
+          featured?: boolean
+          id?: string
+          image_urls?: string[]
+          published_at?: string | null
+          short_description?: string | null
+          slug: string
+          sort_order?: number
+          status?: Database["public"]["Enums"]["content_status"]
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          author_id?: string | null
+          category?: string | null
+          content?: string
+          cover_image_url?: string | null
+          created_at?: string
+          featured?: boolean
+          id?: string
+          image_urls?: string[]
+          published_at?: string | null
+          short_description?: string | null
+          slug?: string
+          sort_order?: number
+          status?: Database["public"]["Enums"]["content_status"]
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "blogs_author_id_fkey"
+            columns: ["author_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          active: boolean
+          bio: string | null
+          created_at: string
+          details: string | null
+          featured: boolean
+          full_name: string
+          id: string
+          photo_url: string | null
+          slug: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          bio?: string | null
+          created_at?: string
+          details?: string | null
+          featured?: boolean
+          full_name: string
+          id?: string
+          photo_url?: string | null
+          slug: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          bio?: string | null
+          created_at?: string
+          details?: string | null
+          featured?: boolean
+          full_name?: string
+          id?: string
+          photo_url?: string | null
+          slug?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      submissions: {
+        Row: {
+          author_email: string
+          author_name: string
+          content: string
+          created_at: string
+          description: string | null
+          id: string
+          image_urls: string[]
+          reviewed_at: string | null
+          status: Database["public"]["Enums"]["submission_status"]
+          title: string
+        }
+        Insert: {
+          author_email: string
+          author_name: string
+          content: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_urls?: string[]
+          reviewed_at?: string | null
+          status?: Database["public"]["Enums"]["submission_status"]
+          title: string
+        }
+        Update: {
+          author_email?: string
+          author_name?: string
+          content?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_urls?: string[]
+          reviewed_at?: string | null
+          status?: Database["public"]["Enums"]["submission_status"]
+          title?: string
+        }
+        Relationships: []
+      }
+      thoughts: {
+        Row: {
+          author_name: string
+          content: string
+          created_at: string
+          id: string
+          published_at: string | null
+          sort_order: number
+          status: Database["public"]["Enums"]["content_status"]
+          updated_at: string
+        }
+        Insert: {
+          author_name: string
+          content: string
+          created_at?: string
+          id?: string
+          published_at?: string | null
+          sort_order?: number
+          status?: Database["public"]["Enums"]["content_status"]
+          updated_at?: string
+        }
+        Update: {
+          author_name?: string
+          content?: string
+          created_at?: string
+          id?: string
+          published_at?: string | null
+          sort_order?: number
+          status?: Database["public"]["Enums"]["content_status"]
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      winners: {
+        Row: {
+          active: boolean
+          award_date: string | null
+          award_title: string
+          category: string | null
+          created_at: string
+          description: string | null
+          featured: boolean
+          full_name: string
+          id: string
+          photo_url: string | null
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          award_date?: string | null
+          award_title: string
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          featured?: boolean
+          full_name: string
+          id?: string
+          photo_url?: string | null
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          award_date?: string | null
+          award_title?: string
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          featured?: boolean
+          full_name?: string
+          id?: string
+          photo_url?: string | null
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin"
+      content_status: "draft" | "published"
+      submission_status: "pending" | "approved" | "rejected"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +396,10 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin"],
+      content_status: ["draft", "published"],
+      submission_status: ["pending", "approved", "rejected"],
+    },
   },
 } as const
