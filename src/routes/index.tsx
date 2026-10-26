@@ -5,7 +5,7 @@ import { SectionHeading, EmptyState } from "@/components/shared";
 import { BlogCard } from "@/components/BlogCard";
 import { ProfileCard, ThoughtCard, WinnerCard } from "@/components/Cards";
 import { featuredBlogs, latestBlogs, activeProfiles, publishedThoughts, activeWinners } from "@/lib/queries";
-import { Send, Newspaper, UsersRound, Quote } from "lucide-react";
+import { Send, Newspaper, Quote } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   component: Home,
