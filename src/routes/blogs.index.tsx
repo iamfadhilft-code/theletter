@@ -9,7 +9,7 @@ import { Newspaper, Search } from "lucide-react";
 import { zodValidator } from "@tanstack/zod-adapter";
 import { z } from "zod";
 
-export const Route = createFileRoute("/blogs")({
+export const Route = createFileRoute("/blogs/")({
   validateSearch: zodValidator(
     z.object({
       q: z.string().trim().max(120).optional(),
