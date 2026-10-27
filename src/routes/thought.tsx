@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { SiteLayout } from "@/components/site/SiteLayout";
-import { EmptyState, ThoughtCard } from "@/components/shared";
+import { EmptyState } from "@/components/shared";
+import { ThoughtCard } from "@/components/Cards";
 import { publishedThoughts } from "@/lib/queries";
 import { Quote } from "lucide-react";
 
