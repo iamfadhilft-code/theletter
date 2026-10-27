@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { EmptyState } from "@/components/shared";
@@ -8,6 +8,7 @@ import { latestBlogs, activeProfiles, activeWinners, PAGE_SIZE } from "@/lib/que
 import { Search } from "lucide-react";
 import { zodValidator } from "@tanstack/zod-adapter";
 import { z } from "zod";
+import type { ReactNode } from "react";
 
 export const Route = createFileRoute("/search")({
   validateSearch: zodValidator(z.object({ q: z.string().trim().max(120).optional() })),
@@ -32,9 +33,9 @@ function SearchPage() {
   const { q } = Route.useSearch();
   const term = (q ?? "").trim().toLowerCase();
 
-  const { data: blogs } = useSuspenseQuery({ ...latestBlogs(50), enabled: !!term });
-  const { data: profiles } = useSuspenseQuery({ ...activeProfiles(200), enabled: !!term });
-  const { data: winners } = useSuspenseQuery({ ...activeWinners(200), enabled: !!term });
+  const { data: blogs } = useSuspenseQuery(latestBlogs(50));
+  const { data: profiles } = useSuspenseQuery(activeProfiles(200));
+  const { data: winners } = useSuspenseQuery(activeWinners(200));
 
   if (!term) {
     return (
