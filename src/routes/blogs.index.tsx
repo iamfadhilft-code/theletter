@@ -161,5 +161,3 @@ function BlogsPage() {
     </SiteLayout>
   );
 }
-
-export { GridSkeleton };
