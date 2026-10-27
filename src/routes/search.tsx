@@ -52,7 +52,12 @@ function SearchPage() {
   }
 
   const foundBlogs = blogs.filter(
-    (b) => matches(term, b.title) || matches(term, b.short_description) || matches(term, b.category) || matches(term, b.author?.full_name),
+    (b) =>
+      matches(term, b.title) ||
+      matches(term, b.short_description) ||
+      matches(term, b.content) ||
+      matches(term, b.category) ||
+      matches(term, b.author?.full_name),
   );
   const foundProfiles = profiles.filter((p) => matches(term, p.full_name) || matches(term, p.bio));
   const foundWinners = winners.filter(
@@ -115,7 +120,7 @@ function SearchPage() {
   );
 }
 
-function SearchIntro({ children }: { children: React.ReactNode }) {
+function SearchIntro({ children }: { children: ReactNode }) {
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
       <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Search</p>
@@ -142,4 +147,3 @@ function SearchIntro({ children }: { children: React.ReactNode }) {
   );
 }
 
-export { Link };
