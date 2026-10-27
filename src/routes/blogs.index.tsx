@@ -3,7 +3,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useInfiniteQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { BlogCard } from "@/components/BlogCard";
-import { EmptyState, GridSkeleton } from "@/components/shared";
+import { EmptyState } from "@/components/shared";
 import { publishedBlogsInfinite, blogCategories } from "@/lib/queries";
 import { Newspaper, Search } from "lucide-react";
 import { zodValidator } from "@tanstack/zod-adapter";

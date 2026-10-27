@@ -1,7 +1,8 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { SiteLayout } from "@/components/site/SiteLayout";
-import { ProfileCard, EmptyState } from "@/components/shared";
+import { EmptyState } from "@/components/shared";
+import { ProfileCard } from "@/components/Cards";
 import { activeProfiles } from "@/lib/queries";
 import { UsersRound, Search } from "lucide-react";
 import { zodValidator } from "@tanstack/zod-adapter";
