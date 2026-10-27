@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { Newspaper, UsersRound, Quote, Award, Inbox, FileText, Eye } from "lucide-react";
+import { Newspaper, UsersRound, Quote, Award, Inbox } from "lucide-react";
 import { formatDate } from "@/lib/slugify";
 
 export const Route = createFileRoute("/_authenticated/_admin/")({
@@ -132,4 +132,3 @@ function AdminDashboard() {
   );
 }
 
-export { FileText, Eye };
