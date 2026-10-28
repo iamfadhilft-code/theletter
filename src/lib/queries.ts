@@ -31,27 +31,27 @@ export interface BlogsPage {
   category?: string;
 }
 
-export const publishedBlogsInfinite = ({ q, category }: BlogsPage) =>
-  queryOptions({
-    queryKey: ["blogs", "published", q ?? null, category ?? null],
-    queryFn: async ({ pageParam }: { pageParam: number }) => {
-      let query = supabase
-        .from("blogs")
-        .select(BLOG_AUTHOR_SELECT)
-        .eq("status", "published");
-      const filter = q ? blogTextFilter(q) : null;
-      if (filter) query = query.or(filter);
-      if (category) query = query.eq("category", category);
-      const { data, error } = await query
-        .order("published_at", { ascending: false, nullsFirst: false })
-        .range(pageParam * PAGE_SIZE, pageParam * PAGE_SIZE + PAGE_SIZE - 1);
-      if (error) throw error;
-      return data as unknown as BlogRow[];
-    },
-    initialPageParam: 0,
-    getNextPageParam: (last: BlogRow[], all: BlogRow[][]) =>
-      last.length === PAGE_SIZE ? all.length : undefined,
-  });
+// Plain options object (not queryOptions) so useInfiniteQuery can infer pageParam types.
+export const publishedBlogsInfinite = ({ q, category }: BlogsPage) => ({
+  queryKey: ["blogs", "published", q ?? null, category ?? null] as const,
+  queryFn: async ({ pageParam }: { pageParam: number }) => {
+    let query = supabase
+      .from("blogs")
+      .select(BLOG_AUTHOR_SELECT)
+      .eq("status", "published");
+    const filter = q ? blogTextFilter(q) : null;
+    if (filter) query = query.or(filter);
+    if (category) query = query.eq("category", category);
+    const { data, error } = await query
+      .order("published_at", { ascending: false, nullsFirst: false })
+      .range(pageParam * PAGE_SIZE, pageParam * PAGE_SIZE + PAGE_SIZE - 1);
+    if (error) throw error;
+    return data as unknown as BlogRow[];
+  },
+  initialPageParam: 0,
+  getNextPageParam: (last: BlogRow[], all: BlogRow[][]) =>
+    last.length === PAGE_SIZE ? all.length : undefined,
+});
 
 export const blogCategories = queryOptions({
   queryKey: ["blogs", "categories"],
