@@ -16,13 +16,13 @@ import { Route as SearchRouteImport } from './routes/search'
 import { Route as SubmitRouteImport } from './routes/submit'
 import { Route as ThoughtRouteImport } from './routes/thought'
 import { Route as WinnersRouteImport } from './routes/winners'
-import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/_admin'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as BlogsIndexRouteImport } from './routes/blogs.index'
 import { Route as BlogsSlugRouteImport } from './routes/blogs.$slug'
 import { Route as ProfilesIndexRouteImport } from './routes/profiles.index'
 import { Route as ProfilesIdRouteImport } from './routes/profiles.$id'
-import { Route as AuthenticatedAdminBlogsRouteImport } from './routes/_authenticated/_admin.blogs'
-import { Route as AuthenticatedAdminDashboardRouteImport } from './routes/_authenticated/_admin.dashboard'
+import { Route as AuthenticatedAdminBlogsRouteImport } from './routes/_authenticated/admin.blogs'
+import { Route as AuthenticatedAdminDashboardRouteImport } from './routes/_authenticated/admin.dashboard'
 import { Route as ApiMediaSplatRouteImport } from './routes/api/media/$'
 
 const IndexRoute = IndexRouteImport.update({
@@ -60,7 +60,8 @@ const WinnersRoute = WinnersRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
-  id: '/_admin',
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const BlogsIndexRoute = BlogsIndexRouteImport.update({
@@ -107,12 +108,13 @@ export interface FileRoutesByFullPath {
   '/submit': typeof SubmitRoute
   '/thought': typeof ThoughtRoute
   '/winners': typeof WinnersRoute
+  '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/blogs/$slug': typeof BlogsSlugRoute
   '/profiles/$id': typeof ProfilesIdRoute
   '/blogs/': typeof BlogsIndexRoute
   '/profiles/': typeof ProfilesIndexRoute
-  '/blogs': typeof AuthenticatedAdminBlogsRoute
-  '/dashboard': typeof AuthenticatedAdminDashboardRoute
+  '/admin/blogs': typeof AuthenticatedAdminBlogsRoute
+  '/admin/dashboard': typeof AuthenticatedAdminDashboardRoute
   '/api/media/$': typeof ApiMediaSplatRoute
 }
 export interface FileRoutesByTo {
@@ -122,11 +124,13 @@ export interface FileRoutesByTo {
   '/submit': typeof SubmitRoute
   '/thought': typeof ThoughtRoute
   '/winners': typeof WinnersRoute
+  '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/blogs/$slug': typeof BlogsSlugRoute
   '/profiles/$id': typeof ProfilesIdRoute
   '/blogs': typeof BlogsIndexRoute
   '/profiles': typeof ProfilesIndexRoute
-  '/dashboard': typeof AuthenticatedAdminDashboardRoute
+  '/admin/blogs': typeof AuthenticatedAdminBlogsRoute
+  '/admin/dashboard': typeof AuthenticatedAdminDashboardRoute
   '/api/media/$': typeof ApiMediaSplatRoute
 }
 export interface FileRoutesById {
@@ -138,13 +142,13 @@ export interface FileRoutesById {
   '/submit': typeof SubmitRoute
   '/thought': typeof ThoughtRoute
   '/winners': typeof WinnersRoute
-  '/_authenticated/_admin': typeof AuthenticatedAdminRouteWithChildren
+  '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/blogs/$slug': typeof BlogsSlugRoute
   '/profiles/$id': typeof ProfilesIdRoute
   '/blogs/': typeof BlogsIndexRoute
   '/profiles/': typeof ProfilesIndexRoute
-  '/_authenticated/_admin/blogs': typeof AuthenticatedAdminBlogsRoute
-  '/_authenticated/_admin/dashboard': typeof AuthenticatedAdminDashboardRoute
+  '/_authenticated/admin/blogs': typeof AuthenticatedAdminBlogsRoute
+  '/_authenticated/admin/dashboard': typeof AuthenticatedAdminDashboardRoute
   '/api/media/$': typeof ApiMediaSplatRoute
 }
 export interface FileRouteTypes {
@@ -156,12 +160,13 @@ export interface FileRouteTypes {
     | '/submit'
     | '/thought'
     | '/winners'
+    | '/admin'
     | '/blogs/$slug'
     | '/profiles/$id'
     | '/blogs/'
     | '/profiles/'
-    | '/blogs'
-    | '/dashboard'
+    | '/admin/blogs'
+    | '/admin/dashboard'
     | '/api/media/$'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -171,11 +176,13 @@ export interface FileRouteTypes {
     | '/submit'
     | '/thought'
     | '/winners'
+    | '/admin'
     | '/blogs/$slug'
     | '/profiles/$id'
     | '/blogs'
     | '/profiles'
-    | '/dashboard'
+    | '/admin/blogs'
+    | '/admin/dashboard'
     | '/api/media/$'
   id:
     | '__root__'
@@ -186,13 +193,13 @@ export interface FileRouteTypes {
     | '/submit'
     | '/thought'
     | '/winners'
-    | '/_authenticated/_admin'
+    | '/_authenticated/admin'
     | '/blogs/$slug'
     | '/profiles/$id'
     | '/blogs/'
     | '/profiles/'
-    | '/_authenticated/_admin/blogs'
-    | '/_authenticated/_admin/dashboard'
+    | '/_authenticated/admin/blogs'
+    | '/_authenticated/admin/dashboard'
     | '/api/media/$'
   fileRoutesById: FileRoutesById
 }
@@ -262,10 +269,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WinnersRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/_admin': {
-      id: '/_authenticated/_admin'
-      path: ''
-      fullPath: '/'
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
       preLoaderRoute: typeof AuthenticatedAdminRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
@@ -297,17 +304,17 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfilesIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/_admin/blogs': {
-      id: '/_authenticated/_admin/blogs'
+    '/_authenticated/admin/blogs': {
+      id: '/_authenticated/admin/blogs'
       path: '/blogs'
-      fullPath: '/blogs'
+      fullPath: '/admin/blogs'
       preLoaderRoute: typeof AuthenticatedAdminBlogsRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
-    '/_authenticated/_admin/dashboard': {
-      id: '/_authenticated/_admin/dashboard'
+    '/_authenticated/admin/dashboard': {
+      id: '/_authenticated/admin/dashboard'
       path: '/dashboard'
-      fullPath: '/dashboard'
+      fullPath: '/admin/dashboard'
       preLoaderRoute: typeof AuthenticatedAdminDashboardRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
