@@ -4,13 +4,16 @@ import { supabase } from "@/integrations/supabase/client";
 import { Newspaper, UsersRound, Quote, Award, Inbox } from "lucide-react";
 import { formatDate } from "@/lib/slugify";
 
-export const Route = createFileRoute("/_authenticated/_admin/")({
+export const Route = createFileRoute("/_authenticated/admin/dashboard")({
   head: () => ({ meta: [{ title: "Admin overview — The Letter" }] }),
   component: AdminDashboard,
 });
 
+// Table names come from callers, so go through a loosely-typed client here.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function count(table: string, filters?: Record<string, unknown>) {
-  let query = supabase.from(table).select("id", { count: "exact", head: true });
+  const client = supabase as any;
+  let query = client.from(table).select("id", { count: "exact", head: true });
   if (filters) for (const [k, v] of Object.entries(filters)) query = query.eq(k, v);
   const { count: c } = await query;
   return c ?? 0;

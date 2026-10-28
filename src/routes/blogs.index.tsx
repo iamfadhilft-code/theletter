@@ -49,7 +49,7 @@ function BlogsPage() {
     isFetchingNextPage,
   } = useInfiniteQuery(publishedBlogsInfinite({ q, category }));
 
-  const blogs = data.pages.flat();
+  const blogs = data?.pages.flat() ?? [];
 
   const applyFilter = (nextCategory?: string) => {
     navigate({

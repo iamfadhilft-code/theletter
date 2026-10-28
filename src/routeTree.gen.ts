@@ -10,6 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as SearchRouteImport } from './routes/search'
+import { Route as SubmitRouteImport } from './routes/submit'
+import { Route as ThoughtRouteImport } from './routes/thought'
+import { Route as WinnersRouteImport } from './routes/winners'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as BlogsIndexRouteImport } from './routes/blogs.index'
+import { Route as BlogsSlugRouteImport } from './routes/blogs.$slug'
+import { Route as ProfilesIndexRouteImport } from './routes/profiles.index'
+import { Route as ProfilesIdRouteImport } from './routes/profiles.$id'
+import { Route as AuthenticatedAdminBlogsRouteImport } from './routes/_authenticated/admin.blogs'
+import { Route as AuthenticatedAdminDashboardRouteImport } from './routes/_authenticated/admin.dashboard'
+import { Route as AuthenticatedAdminProfilesRouteImport } from './routes/_authenticated/admin.profiles'
+import { Route as AuthenticatedAdminSubmissionsRouteImport } from './routes/_authenticated/admin.submissions'
+import { Route as AuthenticatedAdminThoughtsRouteImport } from './routes/_authenticated/admin.thoughts'
+import { Route as AuthenticatedAdminWinnersRouteImport } from './routes/_authenticated/admin.winners'
 import { Route as ApiMediaSplatRouteImport } from './routes/api/media/$'
 
 const IndexRoute = IndexRouteImport.update({
@@ -17,6 +34,95 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SubmitRoute = SubmitRouteImport.update({
+  id: '/submit',
+  path: '/submit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ThoughtRoute = ThoughtRouteImport.update({
+  id: '/thought',
+  path: '/thought',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WinnersRoute = WinnersRouteImport.update({
+  id: '/winners',
+  path: '/winners',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const BlogsIndexRoute = BlogsIndexRouteImport.update({
+  id: '/blogs/',
+  path: '/blogs/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogsSlugRoute = BlogsSlugRouteImport.update({
+  id: '/blogs/$slug',
+  path: '/blogs/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfilesIndexRoute = ProfilesIndexRouteImport.update({
+  id: '/profiles/',
+  path: '/profiles/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfilesIdRoute = ProfilesIdRouteImport.update({
+  id: '/profiles/$id',
+  path: '/profiles/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAdminBlogsRoute = AuthenticatedAdminBlogsRouteImport.update({
+  id: '/blogs',
+  path: '/blogs',
+  getParentRoute: () => AuthenticatedAdminRoute,
+} as any)
+const AuthenticatedAdminDashboardRoute =
+  AuthenticatedAdminDashboardRouteImport.update({
+    id: '/dashboard',
+    path: '/dashboard',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminProfilesRoute =
+  AuthenticatedAdminProfilesRouteImport.update({
+    id: '/profiles',
+    path: '/profiles',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminSubmissionsRoute =
+  AuthenticatedAdminSubmissionsRouteImport.update({
+    id: '/submissions',
+    path: '/submissions',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminThoughtsRoute =
+  AuthenticatedAdminThoughtsRouteImport.update({
+    id: '/thoughts',
+    path: '/thoughts',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminWinnersRoute =
+  AuthenticatedAdminWinnersRouteImport.update({
+    id: '/winners',
+    path: '/winners',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 const ApiMediaSplatRoute = ApiMediaSplatRouteImport.update({
   id: '/api/media/$',
   path: '/api/media/$',
@@ -25,27 +131,142 @@ const ApiMediaSplatRoute = ApiMediaSplatRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/search': typeof SearchRoute
+  '/submit': typeof SubmitRoute
+  '/thought': typeof ThoughtRoute
+  '/winners': typeof WinnersRoute
+  '/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/blogs/$slug': typeof BlogsSlugRoute
+  '/profiles/$id': typeof ProfilesIdRoute
+  '/blogs/': typeof BlogsIndexRoute
+  '/profiles/': typeof ProfilesIndexRoute
+  '/admin/blogs': typeof AuthenticatedAdminBlogsRoute
+  '/admin/dashboard': typeof AuthenticatedAdminDashboardRoute
+  '/admin/profiles': typeof AuthenticatedAdminProfilesRoute
+  '/admin/submissions': typeof AuthenticatedAdminSubmissionsRoute
+  '/admin/thoughts': typeof AuthenticatedAdminThoughtsRoute
+  '/admin/winners': typeof AuthenticatedAdminWinnersRoute
   '/api/media/$': typeof ApiMediaSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/search': typeof SearchRoute
+  '/submit': typeof SubmitRoute
+  '/thought': typeof ThoughtRoute
+  '/winners': typeof WinnersRoute
+  '/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/blogs/$slug': typeof BlogsSlugRoute
+  '/profiles/$id': typeof ProfilesIdRoute
+  '/blogs': typeof BlogsIndexRoute
+  '/profiles': typeof ProfilesIndexRoute
+  '/admin/blogs': typeof AuthenticatedAdminBlogsRoute
+  '/admin/dashboard': typeof AuthenticatedAdminDashboardRoute
+  '/admin/profiles': typeof AuthenticatedAdminProfilesRoute
+  '/admin/submissions': typeof AuthenticatedAdminSubmissionsRoute
+  '/admin/thoughts': typeof AuthenticatedAdminThoughtsRoute
+  '/admin/winners': typeof AuthenticatedAdminWinnersRoute
   '/api/media/$': typeof ApiMediaSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/search': typeof SearchRoute
+  '/submit': typeof SubmitRoute
+  '/thought': typeof ThoughtRoute
+  '/winners': typeof WinnersRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/blogs/$slug': typeof BlogsSlugRoute
+  '/profiles/$id': typeof ProfilesIdRoute
+  '/blogs/': typeof BlogsIndexRoute
+  '/profiles/': typeof ProfilesIndexRoute
+  '/_authenticated/admin/blogs': typeof AuthenticatedAdminBlogsRoute
+  '/_authenticated/admin/dashboard': typeof AuthenticatedAdminDashboardRoute
+  '/_authenticated/admin/profiles': typeof AuthenticatedAdminProfilesRoute
+  '/_authenticated/admin/submissions': typeof AuthenticatedAdminSubmissionsRoute
+  '/_authenticated/admin/thoughts': typeof AuthenticatedAdminThoughtsRoute
+  '/_authenticated/admin/winners': typeof AuthenticatedAdminWinnersRoute
   '/api/media/$': typeof ApiMediaSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/media/$'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/search'
+    | '/submit'
+    | '/thought'
+    | '/winners'
+    | '/admin'
+    | '/blogs/$slug'
+    | '/profiles/$id'
+    | '/blogs/'
+    | '/profiles/'
+    | '/admin/blogs'
+    | '/admin/dashboard'
+    | '/admin/profiles'
+    | '/admin/submissions'
+    | '/admin/thoughts'
+    | '/admin/winners'
+    | '/api/media/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/media/$'
-  id: '__root__' | '/' | '/api/media/$'
+  to:
+    | '/'
+    | '/auth'
+    | '/search'
+    | '/submit'
+    | '/thought'
+    | '/winners'
+    | '/admin'
+    | '/blogs/$slug'
+    | '/profiles/$id'
+    | '/blogs'
+    | '/profiles'
+    | '/admin/blogs'
+    | '/admin/dashboard'
+    | '/admin/profiles'
+    | '/admin/submissions'
+    | '/admin/thoughts'
+    | '/admin/winners'
+    | '/api/media/$'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/search'
+    | '/submit'
+    | '/thought'
+    | '/winners'
+    | '/_authenticated/admin'
+    | '/blogs/$slug'
+    | '/profiles/$id'
+    | '/blogs/'
+    | '/profiles/'
+    | '/_authenticated/admin/blogs'
+    | '/_authenticated/admin/dashboard'
+    | '/_authenticated/admin/profiles'
+    | '/_authenticated/admin/submissions'
+    | '/_authenticated/admin/thoughts'
+    | '/_authenticated/admin/winners'
+    | '/api/media/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
+  SearchRoute: typeof SearchRoute
+  SubmitRoute: typeof SubmitRoute
+  ThoughtRoute: typeof ThoughtRoute
+  WinnersRoute: typeof WinnersRoute
+  BlogsSlugRoute: typeof BlogsSlugRoute
+  ProfilesIdRoute: typeof ProfilesIdRoute
+  BlogsIndexRoute: typeof BlogsIndexRoute
+  ProfilesIndexRoute: typeof ProfilesIndexRoute
   ApiMediaSplatRoute: typeof ApiMediaSplatRoute
 }
 
@@ -58,6 +279,125 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/submit': {
+      id: '/submit'
+      path: '/submit'
+      fullPath: '/submit'
+      preLoaderRoute: typeof SubmitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/thought': {
+      id: '/thought'
+      path: '/thought'
+      fullPath: '/thought'
+      preLoaderRoute: typeof ThoughtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/winners': {
+      id: '/winners'
+      path: '/winners'
+      fullPath: '/winners'
+      preLoaderRoute: typeof WinnersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/blogs/': {
+      id: '/blogs/'
+      path: '/blogs'
+      fullPath: '/blogs/'
+      preLoaderRoute: typeof BlogsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blogs/$slug': {
+      id: '/blogs/$slug'
+      path: '/blogs/$slug'
+      fullPath: '/blogs/$slug'
+      preLoaderRoute: typeof BlogsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profiles/': {
+      id: '/profiles/'
+      path: '/profiles'
+      fullPath: '/profiles/'
+      preLoaderRoute: typeof ProfilesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profiles/$id': {
+      id: '/profiles/$id'
+      path: '/profiles/$id'
+      fullPath: '/profiles/$id'
+      preLoaderRoute: typeof ProfilesIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/admin/blogs': {
+      id: '/_authenticated/admin/blogs'
+      path: '/blogs'
+      fullPath: '/admin/blogs'
+      preLoaderRoute: typeof AuthenticatedAdminBlogsRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/dashboard': {
+      id: '/_authenticated/admin/dashboard'
+      path: '/dashboard'
+      fullPath: '/admin/dashboard'
+      preLoaderRoute: typeof AuthenticatedAdminDashboardRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/profiles': {
+      id: '/_authenticated/admin/profiles'
+      path: '/profiles'
+      fullPath: '/admin/profiles'
+      preLoaderRoute: typeof AuthenticatedAdminProfilesRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/submissions': {
+      id: '/_authenticated/admin/submissions'
+      path: '/submissions'
+      fullPath: '/admin/submissions'
+      preLoaderRoute: typeof AuthenticatedAdminSubmissionsRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/thoughts': {
+      id: '/_authenticated/admin/thoughts'
+      path: '/thoughts'
+      fullPath: '/admin/thoughts'
+      preLoaderRoute: typeof AuthenticatedAdminThoughtsRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/winners': {
+      id: '/_authenticated/admin/winners'
+      path: '/winners'
+      fullPath: '/admin/winners'
+      preLoaderRoute: typeof AuthenticatedAdminWinnersRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
     '/api/media/$': {
       id: '/api/media/$'
       path: '/api/media/$'
@@ -68,8 +408,50 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedAdminRouteChildren {
+  AuthenticatedAdminBlogsRoute: typeof AuthenticatedAdminBlogsRoute
+  AuthenticatedAdminDashboardRoute: typeof AuthenticatedAdminDashboardRoute
+  AuthenticatedAdminProfilesRoute: typeof AuthenticatedAdminProfilesRoute
+  AuthenticatedAdminSubmissionsRoute: typeof AuthenticatedAdminSubmissionsRoute
+  AuthenticatedAdminThoughtsRoute: typeof AuthenticatedAdminThoughtsRoute
+  AuthenticatedAdminWinnersRoute: typeof AuthenticatedAdminWinnersRoute
+}
+
+const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
+  AuthenticatedAdminBlogsRoute: AuthenticatedAdminBlogsRoute,
+  AuthenticatedAdminDashboardRoute: AuthenticatedAdminDashboardRoute,
+  AuthenticatedAdminProfilesRoute: AuthenticatedAdminProfilesRoute,
+  AuthenticatedAdminSubmissionsRoute: AuthenticatedAdminSubmissionsRoute,
+  AuthenticatedAdminThoughtsRoute: AuthenticatedAdminThoughtsRoute,
+  AuthenticatedAdminWinnersRoute: AuthenticatedAdminWinnersRoute,
+}
+
+const AuthenticatedAdminRouteWithChildren =
+  AuthenticatedAdminRoute._addFileChildren(AuthenticatedAdminRouteChildren)
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRouteWithChildren
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRouteWithChildren,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
+  SearchRoute: SearchRoute,
+  SubmitRoute: SubmitRoute,
+  ThoughtRoute: ThoughtRoute,
+  WinnersRoute: WinnersRoute,
+  BlogsSlugRoute: BlogsSlugRoute,
+  ProfilesIdRoute: ProfilesIdRoute,
+  BlogsIndexRoute: BlogsIndexRoute,
+  ProfilesIndexRoute: ProfilesIndexRoute,
   ApiMediaSplatRoute: ApiMediaSplatRoute,
 }
 export const routeTree = rootRouteImport

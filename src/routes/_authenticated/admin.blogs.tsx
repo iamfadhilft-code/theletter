@@ -10,7 +10,7 @@ import type { BlogRow, ProfileRow, ContentStatus } from "@/lib/types";
 import { Plus, Pencil, Trash2, Loader2, Newspaper, Eye, EyeOff, Star } from "lucide-react";
 import { toast } from "sonner";
 
-export const Route = createFileRoute("/_authenticated/_admin/blogs")({
+export const Route = createFileRoute("/_authenticated/admin/blogs")({
   head: () => ({ meta: [{ title: "Manage blogs — The Letter" }] }),
   component: AdminBlogs,
 });
@@ -84,7 +84,7 @@ function AdminBlogs() {
         short_description: form.short_description.trim() || null,
         content: form.content,
         cover_image_url: form.cover_image_url,
-        image_urls: form.image_urls.length ? form.image_urls : null,
+        image_urls: form.image_urls.length ? form.image_urls : [],
         author_id: form.author_id,
         status: form.status,
         featured: form.featured,

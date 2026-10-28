@@ -85,7 +85,7 @@ function SubmitPage() {
         content,
         author_name: authorName,
         author_email: authorEmail,
-        image_urls: imageUrls.length ? imageUrls : null,
+        image_urls: imageUrls.length ? imageUrls : [],
         status: "pending",
       });
       if (error) throw error;
