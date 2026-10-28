@@ -30,22 +30,21 @@ export const Route = createFileRoute("/blogs/$slug")({
       </div>
     </SiteLayout>
   ),
-  head: ({ loaderData }) => ({
+  head: ({ loaderData }) => {
+    // loaderData is undefined when the loader threw (e.g. unknown slug).
+    const title = loaderData?.title ?? "Letter";
+    const description = loaderData?.short_description ?? "A letter from The Letter.";
+    return {
     meta: [
-      { title: `${loaderData.title} — The Letter` },
-      {
-        name: "description",
-        content: loaderData.short_description ?? "A letter from The Letter.",
-      },
-      { property: "og:title", content: `${loaderData.title} — The Letter` },
-      {
-        property: "og:description",
-        content: loaderData.short_description ?? "A letter from The Letter.",
-      },
+      { title: `${title} — The Letter` },
+      { name: "description", content: description },
+      { property: "og:title", content: `${title} — The Letter` },
+      { property: "og:description", content: description },
       { property: "og:type", content: "article" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-  }),
+    };
+  },
   component: ArticlePage,
 });
 

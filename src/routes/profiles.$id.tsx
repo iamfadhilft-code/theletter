@@ -26,22 +26,22 @@ export const Route = createFileRoute("/profiles/$id")({
       </div>
     </SiteLayout>
   ),
-  head: ({ loaderData }) => ({
+  head: ({ loaderData }) => {
+    // loaderData is undefined when the loader threw (e.g. unknown profile).
+    const name = loaderData?.full_name ?? "Profile";
+    const description =
+      loaderData?.bio ?? `Writings by ${name} for The Letter.`;
+    return {
     meta: [
-      { title: `${loaderData.full_name} — The Letter` },
-      {
-        name: "description",
-        content: loaderData.bio ?? `Writings by ${loaderData.full_name} for The Letter.`,
-      },
-      { property: "og:title", content: `${loaderData.full_name} — The Letter` },
-      {
-        property: "og:description",
-        content: loaderData.bio ?? `Writings by ${loaderData.full_name} for The Letter.`,
-      },
+      { title: `${name} — The Letter` },
+      { name: "description", content: description },
+      { property: "og:title", content: `${name} — The Letter` },
+      { property: "og:description", content: description },
       { property: "og:type", content: "profile" },
       { name: "twitter:card", content: "summary" },
     ],
-  }),
+    };
+  },
   component: ProfilePage,
 });
 

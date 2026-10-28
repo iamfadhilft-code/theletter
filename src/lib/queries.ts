@@ -27,8 +27,8 @@ function blogTextFilter(q: string): string | null {
 }
 
 export interface BlogsPage {
-  q?: string;
-  category?: string;
+  q?: string | undefined;
+  category?: string | undefined;
 }
 
 // Plain options object (not queryOptions) so useInfiniteQuery can infer pageParam types.
