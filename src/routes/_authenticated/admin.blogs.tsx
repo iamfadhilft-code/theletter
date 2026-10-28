@@ -10,7 +10,7 @@ import type { BlogRow, ProfileRow, ContentStatus } from "@/lib/types";
 import { Plus, Pencil, Trash2, Loader2, Newspaper, Eye, EyeOff, Star } from "lucide-react";
 import { toast } from "sonner";
 
-export const Route = createFileRoute("/_authenticated/_admin/blogs")({
+export const Route = createFileRoute("/_authenticated/admin/blogs")({
   head: () => ({ meta: [{ title: "Manage blogs — The Letter" }] }),
   component: AdminBlogs,
 });

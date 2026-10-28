@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import { SITE_NAME } from "@/lib/media";
 
-export const Route = createFileRoute("/_authenticated/_admin")({
+export const Route = createFileRoute("/_authenticated/admin")({
   beforeLoad: ({ location }) => {
     // "/admin" has no page of its own; the overview lives at /admin/dashboard.
     if (location.pathname === "/admin") throw redirect({ to: "/admin/dashboard" });
