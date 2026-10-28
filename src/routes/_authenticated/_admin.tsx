@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { createFileRoute, Link, Outlet, useLocation, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useLocation, useNavigate, redirect } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
 import {
   LayoutDashboard,
@@ -23,7 +23,7 @@ export const Route = createFileRoute("/_authenticated/_admin")({
 });
 
 const ADMIN_NAV = [
-  { label: "Overview", to: "/admin", icon: LayoutDashboard },
+  { label: "Overview", to: "/admin/dashboard", icon: LayoutDashboard },
   { label: "Blogs", to: "/admin/blogs", icon: Newspaper },
   { label: "Profiles", to: "/admin/profiles", icon: UsersRound },
   { label: "Thoughts", to: "/admin/thoughts", icon: Quote },
@@ -89,7 +89,7 @@ function AdminLayout() {
   }
 
   const isActive = (to: string) =>
-    to === "/admin" ? location.pathname === "/admin" : location.pathname.startsWith(to);
+    location.pathname === to || (to !== "/admin/dashboard" && location.pathname.startsWith(to + "/"));
 
   return (
     <div className="flex min-h-screen">
