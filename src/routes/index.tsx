@@ -8,6 +8,23 @@ import { featuredBlogs, latestBlogs, activeProfiles, publishedThoughts, activeWi
 import { Send, Newspaper, Quote } from "lucide-react";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "The Letter — Words that travel further than footsteps" },
+      {
+        name: "description",
+        content:
+          "The Letter is an editorial home for stories, thoughts and voices — blogs, profiles, one-line thoughts, and winners, all in one place.",
+      },
+      { property: "og:title", content: "The Letter — Words that travel further than footsteps" },
+      {
+        property: "og:description",
+        content: "Stories, thoughts and voices — crafted for the ones who read between the lines.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Home,
 });
 

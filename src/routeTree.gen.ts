@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as SearchRouteImport } from './routes/search'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SubmitRouteImport } from './routes/submit'
 import { Route as ThoughtRouteImport } from './routes/thought'
 import { Route as WinnersRouteImport } from './routes/winners'
@@ -46,6 +47,11 @@ const AuthRoute = AuthRouteImport.update({
 const SearchRoute = SearchRouteImport.update({
   id: '/search',
   path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SubmitRoute = SubmitRouteImport.update({
@@ -133,6 +139,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/search': typeof SearchRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/submit': typeof SubmitRoute
   '/thought': typeof ThoughtRoute
   '/winners': typeof WinnersRoute
@@ -153,6 +160,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/search': typeof SearchRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/submit': typeof SubmitRoute
   '/thought': typeof ThoughtRoute
   '/winners': typeof WinnersRoute
@@ -175,6 +183,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/search': typeof SearchRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/submit': typeof SubmitRoute
   '/thought': typeof ThoughtRoute
   '/winners': typeof WinnersRoute
@@ -197,6 +206,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/search'
+    | '/sitemap.xml'
     | '/submit'
     | '/thought'
     | '/winners'
@@ -217,6 +227,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/search'
+    | '/sitemap.xml'
     | '/submit'
     | '/thought'
     | '/winners'
@@ -238,6 +249,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/auth'
     | '/search'
+    | '/sitemap.xml'
     | '/submit'
     | '/thought'
     | '/winners'
@@ -260,6 +272,7 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
   SearchRoute: typeof SearchRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SubmitRoute: typeof SubmitRoute
   ThoughtRoute: typeof ThoughtRoute
   WinnersRoute: typeof WinnersRoute
@@ -298,6 +311,13 @@ declare module '@tanstack/react-router' {
       path: '/search'
       fullPath: '/search'
       preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/submit': {
@@ -445,6 +465,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
   SearchRoute: SearchRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   SubmitRoute: SubmitRoute,
   ThoughtRoute: ThoughtRoute,
   WinnersRoute: WinnersRoute,

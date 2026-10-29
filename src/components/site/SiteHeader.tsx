@@ -1,6 +1,7 @@
 import { Link, useLocation, useNavigate } from "@tanstack/react-router";
-import { Mail, Send, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { Mail, Send, Menu, X, ShieldCheck } from "lucide-react";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 import { SITE_NAME } from "@/lib/media";
 
 const NAV = [
@@ -15,6 +16,21 @@ export function SiteHeader() {
   const location = useLocation();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const [signedIn, setSignedIn] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+    supabase.auth.getSession().then(({ data }) => {
+      if (active) setSignedIn(Boolean(data.session));
+    });
+    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (active) setSignedIn(Boolean(session));
+    });
+    return () => {
+      active = false;
+      sub.subscription.unsubscribe();
+    };
+  }, []);
 
   const isActive = (to: string) =>
     to === "/" ? location.pathname === "/" : location.pathname.startsWith(to);
@@ -55,6 +71,15 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex shrink-0 items-center gap-2">
+          {signedIn && (
+            <Link
+              to="/admin"
+              className="hidden items-center gap-2 rounded-full border border-primary/40 bg-primary-soft px-4 py-2.5 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground sm:inline-flex"
+            >
+              <ShieldCheck className="size-4" />
+              Admin
+            </Link>
+          )}
           <Link
             to="/submit"
             className="hidden items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-transform hover:scale-[1.03] sm:inline-flex"
@@ -98,13 +123,23 @@ export function SiteHeader() {
             >
               <Send className="size-4" /> Submit your work
             </Link>
-            <button
-              type="button"
-              onClick={submitSearchShortcut}
-              className="rounded-xl px-4 py-2.5 text-left text-xs text-muted-foreground"
-            >
-              Admin sign in
-            </button>
+            {signedIn ? (
+              <Link
+                to="/admin"
+                onClick={() => setOpen(false)}
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary-soft px-4 py-2.5 text-sm font-semibold text-primary"
+              >
+                <ShieldCheck className="size-4" /> Admin dashboard
+              </Link>
+            ) : (
+              <button
+                type="button"
+                onClick={submitSearchShortcut}
+                className="rounded-xl px-4 py-2.5 text-left text-xs text-muted-foreground"
+              >
+                Admin sign in
+              </button>
+            )}
           </nav>
         </div>
       )}
