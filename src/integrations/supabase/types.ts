@@ -16,133 +16,198 @@ export type Database = {
     Tables: {
       blogs: {
         Row: {
+          author_id: string | null
           author_image: string | null
           author_name: string | null
+          category: string | null
           content: string | null
-          cover_image: string | null
+          cover_image_url: string | null
           created_at: string | null
           excerpt: string | null
+          featured: boolean
           id: string
+          image_urls: string[] | null
+          published_at: string | null
+          short_description: string | null
           slug: string
-          status: string | null
+          sort_order: number
+          status: string
           title: string
           updated_at: string | null
         }
         Insert: {
+          author_id?: string | null
           author_image?: string | null
           author_name?: string | null
+          category?: string | null
           content?: string | null
-          cover_image?: string | null
+          cover_image_url?: string | null
           created_at?: string | null
           excerpt?: string | null
+          featured?: boolean
           id?: string
+          image_urls?: string[] | null
+          published_at?: string | null
+          short_description?: string | null
           slug: string
-          status?: string | null
+          sort_order?: number
+          status?: string
           title: string
           updated_at?: string | null
         }
         Update: {
+          author_id?: string | null
           author_image?: string | null
           author_name?: string | null
+          category?: string | null
           content?: string | null
-          cover_image?: string | null
+          cover_image_url?: string | null
           created_at?: string | null
           excerpt?: string | null
+          featured?: boolean
           id?: string
+          image_urls?: string[] | null
+          published_at?: string | null
+          short_description?: string | null
           slug?: string
-          status?: string | null
+          sort_order?: number
+          status?: string
           title?: string
           updated_at?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "blogs_author_id_fkey"
+            columns: ["author_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       profiles: {
         Row: {
+          active: boolean
           bio: string | null
           created_at: string | null
           designation: string | null
+          details: string | null
+          featured: boolean
+          full_name: string
           id: string
-          name: string
           photo_url: string | null
+          slug: string
+          sort_order: number
+          updated_at: string
         }
         Insert: {
+          active?: boolean
           bio?: string | null
           created_at?: string | null
           designation?: string | null
+          details?: string | null
+          featured?: boolean
+          full_name: string
           id?: string
-          name: string
           photo_url?: string | null
+          slug?: string
+          sort_order?: number
+          updated_at?: string
         }
         Update: {
+          active?: boolean
           bio?: string | null
           created_at?: string | null
           designation?: string | null
+          details?: string | null
+          featured?: boolean
+          full_name?: string
           id?: string
-          name?: string
           photo_url?: string | null
+          slug?: string
+          sort_order?: number
+          updated_at?: string
         }
         Relationships: []
       }
       submissions: {
         Row: {
+          author_email: string | null
+          author_name: string
           content: string | null
           created_at: string | null
-          email: string | null
+          description: string | null
           id: string
           image_url: string | null
-          name: string
-          status: string | null
+          image_urls: string[] | null
+          reviewed_at: string | null
+          status: string
           title: string | null
         }
         Insert: {
+          author_email?: string | null
+          author_name: string
           content?: string | null
           created_at?: string | null
-          email?: string | null
+          description?: string | null
           id?: string
           image_url?: string | null
-          name: string
-          status?: string | null
+          image_urls?: string[] | null
+          reviewed_at?: string | null
+          status?: string
           title?: string | null
         }
         Update: {
+          author_email?: string | null
+          author_name?: string
           content?: string | null
           created_at?: string | null
-          email?: string | null
+          description?: string | null
           id?: string
           image_url?: string | null
-          name?: string
-          status?: string | null
+          image_urls?: string[] | null
+          reviewed_at?: string | null
+          status?: string
           title?: string | null
         }
         Relationships: []
       }
       thoughts: {
         Row: {
-          author_name: string | null
+          author_name: string
           content: string
           created_at: string | null
           id: string
           image_url: string | null
+          published_at: string | null
+          sort_order: number
           status: string | null
           title: string | null
+          updated_at: string
         }
         Insert: {
-          author_name?: string | null
+          author_name: string
           content: string
           created_at?: string | null
           id?: string
           image_url?: string | null
+          published_at?: string | null
+          sort_order?: number
           status?: string | null
           title?: string | null
+          updated_at?: string
         }
         Update: {
-          author_name?: string | null
+          author_name?: string
           content?: string
           created_at?: string | null
           id?: string
           image_url?: string | null
+          published_at?: string | null
+          sort_order?: number
           status?: string | null
           title?: string | null
+          updated_at?: string
         }
         Relationships: []
       }
@@ -150,47 +215,68 @@ export type Database = {
         Row: {
           created_at: string | null
           id: string
-          role: string | null
+          role: string
           user_id: string
         }
         Insert: {
           created_at?: string | null
           id?: string
-          role?: string | null
+          role?: string
           user_id: string
         }
         Update: {
           created_at?: string | null
           id?: string
-          role?: string | null
+          role?: string
           user_id?: string
         }
         Relationships: []
       }
       winners: {
         Row: {
+          active: boolean
+          award_date: string | null
+          award_title: string
+          category: string | null
           created_at: string | null
           description: string | null
+          featured: boolean
+          full_name: string
           id: string
-          name: string
           photo_url: string | null
           position: string | null
+          sort_order: number
+          updated_at: string
         }
         Insert: {
+          active?: boolean
+          award_date?: string | null
+          award_title?: string
+          category?: string | null
           created_at?: string | null
           description?: string | null
+          featured?: boolean
+          full_name: string
           id?: string
-          name: string
           photo_url?: string | null
           position?: string | null
+          sort_order?: number
+          updated_at?: string
         }
         Update: {
+          active?: boolean
+          award_date?: string | null
+          award_title?: string
+          category?: string | null
           created_at?: string | null
           description?: string | null
+          featured?: boolean
+          full_name?: string
           id?: string
-          name?: string
           photo_url?: string | null
           position?: string | null
+          sort_order?: number
+          updated_at?: string
         }
         Relationships: []
       }
@@ -199,7 +285,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_admin: { Args: never; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
